@@ -8,12 +8,17 @@ const UNITS = process.env.UNITS || 'metric';
 /* GET home page. */
 router.get('/', function(req, res) {
   console.log(OWM_API_KEY);
-  res.render('index', { weather: null, err: null });
+  res.render('index', { weather: null, err: null, api: OWM_API_KEY });
 });
 
 router.post('/get_weather', async function (req,res) {
   let city = req.body.city;
+  console.log("api key:");
+  console.log(OWM_API_KEY);
   let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${UNITS}&appid=${OWM_API_KEY}`;
+
+  console.log("api key:");
+  console.log(url);
 
   try {
     let data = await fetch(url);
